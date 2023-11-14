@@ -177,12 +177,13 @@ int mostrarDados()
 rlutil::setColor(rlutil::WHITE);
 }
 
-int unJugador(int& mp, string& mj)
+int unJugador()
+
 {
-    string jugador1;
+    string jugador1,mj;
     int contadorTiradas = 0, puntuacion = 0, rondas = 1;
     int contadorEscalera = 0, sexteto = 0;
-    int contadorTrio = 0, TX=0, MAX1=0, MAX2=0;
+    int contadorTrio = 0, TX=0, MAX1=0, MAX2=0,mp=0;
 
     cout << "Ingrese nombre de jugador: ";
     cin >> jugador1;

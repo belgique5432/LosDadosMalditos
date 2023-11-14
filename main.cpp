@@ -12,8 +12,7 @@ void mayorPuntaje(){
 
 #include "utils.h"
     int dado[6];
-    int mp=0;
-    string mj;
+
 
 
 
