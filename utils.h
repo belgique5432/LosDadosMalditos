@@ -6,7 +6,9 @@
 
 using namespace std;
 
+ //AGREGADO POR AGUS
 extern int dado[];
+
 int mostrarDados()
 {
     for (int i = 0; i <= 5; i++)
@@ -158,7 +160,7 @@ int mostrarDados()
     }
 }
 
-int unJugador(int& mp, string& mj)
+int unJugador()
 {
     string jugador1;
     int contadorTiradas = 0, puntuacion = 0, rondas = 1;
@@ -187,35 +189,29 @@ int unJugador(int& mp, string& mj)
             }
             puntuacion += dado[i];
         }
-// CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
-        for (int N = 1; N < 7; N++)
-        {
-            contadorTrio=0;
-            for(int D = 0; D <= 5; D++)
-            {
+ // CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
+        for (int N = 1; N < 7; N++) {
+                contadorTrio=0;
+                for(int D = 0; D <= 5; D++){
                 if (dado[D] == N)
                 {
                     contadorTrio ++;
                 }
-                if(contadorTrio==3)
-                {
-                    if (MAX1==0)
-                    {
-                        MAX1=dado[D];
-                    }
-                    else
-                    {
-                        MAX2=dado[D];
-                    }
-                    if(MAX2>MAX1)
-                    {
-                        MAX1=MAX2;
-                    }
+                if(contadorTrio==3){
+                                if (MAX1==0)
+                                {
+                                MAX1=dado[D];
+                                }else{
+                                MAX2=dado[D];
+                                }
+                                if(MAX2>MAX1){
+                                MAX1=MAX2;
+                                }
                 }
 
-            }
+                }
         }
-        puntuacion += MAX1*10;
+                puntuacion += MAX1*10;
 
 // CODIGO TRIO X  CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
 
@@ -225,7 +221,7 @@ int unJugador(int& mp, string& mj)
         contadorTiradas++;
         mostrarDados();
         system("pause");
-        cout<<"ES TX "<<MAX1 <<endl;
+                        cout<<"ES TX "<<MAX1 <<endl;
 
         if (contadorTiradas % 3 == 0)
         {
@@ -233,7 +229,7 @@ int unJugador(int& mp, string& mj)
             system("cls");
             rlutil::setColor(rlutil::BLUE);
             rlutil::locate(5,5);
-            cout<<"-----------------------------------------";
+          cout<<"-----------------------------------------";
             rlutil::locate(5,6);
             cout<<" jugador "<<jugador1<<" siguiente ronda "<<rondas<< " puntaje "<<puntuacion<<endl;
             rlutil::locate(5,7);
@@ -247,7 +243,7 @@ int unJugador(int& mp, string& mj)
             rlutil::setColor(rlutil::WHITE);
             system("cls");
 
-        }
+            }
 
         if (contadorEscalera == 6)
         {
@@ -264,206 +260,24 @@ int unJugador(int& mp, string& mj)
             system("pause");
         }
     }
-    //CARGA EL MAYOR PUNTAJE A SCORE SI ESTE ES MAYOR A MP
-    if(puntuacion>mp)
-    {
-        mp = puntuacion;
-        mj = jugador1;
-    }
 
     return 0; // Puedes devolver un valor si es necesario
 }
 
-
-int MP(int& mp, string& mj)
-{
-    if(mp==0)
-    {
-        cout<<"Aun no se ha registrado ningun puntaje"<<endl;
-        system("pause");
-    }
-    else
-    {
-        cout << "Jugador con mayor puntaje registrado es: "<<mj<< endl;
-        cout << "Puntaje: "<<mp<< endl;
-        system("pause");
-    }
-
-
-}
-
-int dosJugadores()
-{
+int dosJugadores(){
     string jugador1, jugador2;
-    int puntuacionJugador1 = 0, puntuacionJugador2 = 0, contadorTiradas = 0, rondas = 1;
-    bool bandera = true;
-
+    int puntuacionJugador1= 0, puntuacionJugador2 = 0, bandera = jugador1;
 
     cout<<"Ingrese nombre del jugador 1: ";
-    cin>>jugador1;
+    cin>> jugador1;
     cout<<"Ingrese nombre del jugador 2: ";
-    cin>>jugador2;
+    cin>> jugador2;
 
-    while (puntuacionJugador1 <= 500 || puntuacionJugador2 <= 500)
-    {
+    while (puntuacionJugador1 <= 500 || puntuacionJugador2 <= 500) {
+            if (bandera == jugador1) {
 
-        int contadorEscalera = 0, sexteto = 0;
-        int contadorTrio = 0, TX=0, MAX1=0, MAX2=0;
-
-
-        // Reinicia los contadores en cada iteración
-        contadorEscalera = 0;
-        sexteto = 0;
-        MAX1=0, MAX2=0;
-
-            if (contadorTiradas % 6 == 0) {
-                    rondas++;
-                }
-
-
-            if (bandera)
-            {
-                cout<<"Jugador 1";
-                bool sonIguales = true;
-
-                for (int i = 0; i <= 5; i++)
-                {
-                    dado[i] = 1 + rand() % 6;
-                    if (dado[i] == i + 1)
-                    {
-                        contadorEscalera++;
-                    }
-                    puntuacionJugador1 += dado[i];
-                }
-// CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
-                for (int N = 1; N < 7; N++)
-                {
-                    contadorTrio=0;
-                    for(int D = 0; D <= 5; D++)
-                    {
-                        if (dado[D] == N)
-                        {
-                            contadorTrio ++;
-                        }
-                        if(contadorTrio==3)
-                        {
-                            if (MAX1==0)
-                            {
-                                MAX1=dado[D];
-                            }
-                            else
-                            {
-                                MAX2=dado[D];
-                            }
-                            if(MAX2>MAX1)
-                            {
-                                MAX1=MAX2;
-                            }
-                        }
-
-                    }
-                }
-                puntuacionJugador1 += MAX1*10;
-
-// CODIGO TRIO X  CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
-
-
-
-                cout << "Ronda: " << rondas << endl;
-                contadorTiradas++;
-                cout<<"tiradas: " <<contadorTiradas <<endl;
-                mostrarDados();
-                system("pause");
-                cout<<"ES TX "<<MAX1 <<endl;
-
-                if (contadorEscalera == 6)
-                {
-                    cout << "Victoria por escalera" << endl;
-                    puntuacionJugador1 = 501;
-                }
-
-
-
-                // Verifica la puntuación y continúa o regresa al menú
-                if (puntuacionJugador1 < 500)
-                {
-                    cout << "Puntuacion actual del jugador 1: " << puntuacionJugador1 << " (Necesitas 500 para ganar)" << endl;
-                    system("pause");
-                }
-            }  else
-        {
-            cout<<"Jugador 2";
-
-            bool sonIguales = true;
-
-            for (int i = 0; i <= 5; i++)
-            {
-                dado[i] = 1 + rand() % 6;
-                if (dado[i] == i + 1)
-                {
-                    contadorEscalera++;
-                }
-                puntuacionJugador2 += dado[i];
             }
-// CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
-            for (int N = 1; N < 7; N++)
-            {
-                contadorTrio=0;
-                for(int D = 0; D <= 5; D++)
-                {
-                    if (dado[D] == N)
-                    {
-                        contadorTrio ++;
-                    }
-                    if(contadorTrio==3)
-                    {
-                        if (MAX1==0)
-                        {
-                            MAX1=dado[D];
-                        }
-                        else
-                        {
-                            MAX2=dado[D];
-                        }
-                        if(MAX2>MAX1)
-                        {
-                            MAX1=MAX2;
-                        }
-                    }
-
-                }
-            }
-            puntuacionJugador2 += MAX1*10;
-
-// CODIGO TRIO X  CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
-
-
-
-            cout << "Ronda: " << rondas << endl;
-            contadorTiradas++;
-            mostrarDados();
-            system("pause");
-            cout<<"ES TX "<<MAX1 <<endl;
-
-            if (contadorEscalera == 6)
-            {
-                cout << "Victoria por escalera" << endl;
-                puntuacionJugador2 = 501;
-            }
-
-
-
-            // Verifica la puntuación y continúa o regresa al menú
-            if (puntuacionJugador2 < 500)
-            {
-                cout << "Puntuacion actual del jugador 2: " << puntuacionJugador2 << " (Necesitas 500 para ganar)" << endl;
-                system("pause");
-            }
-        }
-            contadorTiradas++;
-            bandera = !bandera;
-}
+    }
 
 
 }
-
