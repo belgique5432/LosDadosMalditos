@@ -177,7 +177,7 @@ int unJugador(int& mp, string& mj)
 
 
         bool sonIguales = true;
-
+        srand(time(NULL)); // Inicializa la semilla para la generación de números aleatorios.
         for (int i = 0; i <= 5; i++)
         {
             dado[i] = 1 + rand() % 6;
