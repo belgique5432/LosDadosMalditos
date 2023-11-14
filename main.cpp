@@ -33,11 +33,10 @@ int main(){
         cout<<"Ingrese una opcion" <<endl;
 
         cin>>opc;
-
+        system("cls");
         switch (opc)
         {
         case 1:
-            system("cls");
             unJugador(mp,mj);
             break;
 
@@ -45,7 +44,6 @@ int main(){
             dosJugadores();
             break;
         case 3:
-            system("cls");
             // Llama a una función 'MP'.
             MP(mp,mj);
             break;
