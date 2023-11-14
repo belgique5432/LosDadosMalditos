@@ -7,8 +7,26 @@
 using namespace std;
 
 extern int dado[];
+int entreRondas (string jugador1, int rondas, int puntuacion) {
+
+
+           system("cls");
+            rlutil::setColor(rlutil::BLUE);
+            rlutil::locate(44,3);
+          cout<<"-----------------------------------------";
+            rlutil::locate(44,5);
+            cout<<" jugador "<<jugador1<<" pro ronda "<<rondas<< " puntaje "<<puntuacion<<endl;
+            rlutil::locate(44,7);
+            cout<<"-----------------------------------------";
+            cout<<endl;
+            rlutil::locate(44,8);
+            system("pause");
+            rlutil::setColor(rlutil::WHITE);
+            system("cls");
+             }
 int mostrarDados()
 {
+    rlutil::setColor(rlutil::MAGENTA);
     for (int i = 0; i <= 5; i++)
     {
         if (dado[i] == 1)
@@ -156,6 +174,7 @@ int mostrarDados()
             cout << " -------   ";
         }
     }
+rlutil::setColor(rlutil::WHITE);
 }
 
 int unJugador(int& mp, string& mj)
@@ -228,23 +247,7 @@ int unJugador(int& mp, string& mj)
         if (contadorTiradas % 3 == 0)
         {
             rondas++;
-            system("cls");
-            rlutil::setColor(rlutil::BLUE);
-            rlutil::locate(5,5);
-            cout<<"-----------------------------------------";
-            rlutil::locate(5,6);
-            cout<<" jugador "<<jugador1<<" siguiente ronda "<<rondas<< " puntaje "<<puntuacion<<endl;
-            rlutil::locate(5,7);
-            cout<<"-----------------------------------------";
-            rlutil::locate(44,6);
-            cout<<"|";
-            rlutil::locate(3,6);
-            cout<<"|";
-            cout<<endl;
-            system("pause");
-            rlutil::setColor(rlutil::WHITE);
-            system("cls");
-
+           entreRondas (jugador1,rondas,puntuacion);
         }
 
         if (contadorEscalera == 6)
