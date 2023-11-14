@@ -7,8 +7,26 @@
 using namespace std;
 
 extern int dado[];
+int entreRondas (string jugador1, int rondas, int puntuacion) {
+
+
+           system("cls");
+            rlutil::setColor(rlutil::BLUE);
+            rlutil::locate(44,3);
+          cout<<"-----------------------------------------";
+            rlutil::locate(44,5);
+            cout<<" jugador "<<jugador1<<" pro ronda "<<rondas<< " puntaje "<<puntuacion<<endl;
+            rlutil::locate(44,7);
+            cout<<"-----------------------------------------";
+            cout<<endl;
+            rlutil::locate(44,8);
+            system("pause");
+            rlutil::setColor(rlutil::WHITE);
+            system("cls");
+             }
 int mostrarDados()
 {
+     rlutil::setColor(rlutil::MAGENTA);
     for (int i = 0; i <= 5; i++)
     {
         if (dado[i] == 1)
@@ -156,6 +174,7 @@ int mostrarDados()
             cout << " -------   ";
         }
     }
+    rlutil::setColor(rlutil::WHITE);
 }
 
 int unJugador(int& mp, string& mj)
@@ -170,14 +189,14 @@ int unJugador(int& mp, string& mj)
 
     while (puntuacion <= 500)
     {
-        // Reinicia los contadores en cada iteración
+        // Reinicia los contadores en cada iteraciÃ³n
         contadorEscalera = 0;
         sexteto = 0;
         MAX1=0, MAX2=0;
 
 
         bool sonIguales = true;
-        srand(time(NULL)); // Inicializa la semilla para la generación de números aleatorios.
+        srand(time(NULL)); // Inicializa la semilla para la generaciÃ³n de nÃºmeros aleatorios.
         for (int i = 0; i <= 5; i++)
         {
             dado[i] = 1 + rand() % 6;
@@ -230,24 +249,8 @@ int unJugador(int& mp, string& mj)
         if (contadorTiradas % 3 == 0)
         {
             rondas++;
-            system("cls");
-            rlutil::setColor(rlutil::BLUE);
-            rlutil::locate(5,5);
-            cout<<"-----------------------------------------";
-            rlutil::locate(5,6);
-            cout<<" jugador "<<jugador1<<" siguiente ronda "<<rondas<< " puntaje "<<puntuacion<<endl;
-            rlutil::locate(5,7);
-            cout<<"-----------------------------------------";
-            rlutil::locate(44,6);
-            cout<<"|";
-            rlutil::locate(3,6);
-            cout<<"|";
-            cout<<endl;
-            system("pause");
-            rlutil::setColor(rlutil::WHITE);
-            system("cls");
-
-        }
+             entreRondas (jugador1,rondas,puntuacion);
+            }
 
         if (contadorEscalera == 6)
         {
@@ -257,7 +260,7 @@ int unJugador(int& mp, string& mj)
 
 
 
-        // Verifica la puntuación y continúa o regresa al menú
+        // Verifica la puntuaciÃ³n y continÃºa o regresa al menÃº
         if (puntuacion < 500)
         {
             cout << "Puntuacion actual: " << puntuacion << " (Necesitas 500 para ganar)" << endl;
@@ -311,7 +314,7 @@ int dosJugadores()
         int contadorTrio = 0, TX=0, MAX1=0, MAX2=0;
 
 
-        // Reinicia los contadores en cada iteración
+        // Reinicia los contadores en cada iteraciÃ³n
         contadorEscalera = 0;
         sexteto = 0;
         MAX1=0, MAX2=0;
@@ -384,7 +387,7 @@ int dosJugadores()
 
 
 
-                // Verifica la puntuación y continúa o regresa al menú
+                // Verifica la puntuaciÃ³n y continÃºa o regresa al menÃº
                 if (puntuacionJugador1 < 500)
                 {
                     cout << "Puntuacion actual del jugador 1: " << puntuacionJugador1 << " (Necesitas 500 para ganar)" << endl;
@@ -453,7 +456,7 @@ int dosJugadores()
 
 
 
-            // Verifica la puntuación y continúa o regresa al menú
+            // Verifica la puntuaciÃ³n y continÃºa o regresa al menÃº
             if (puntuacionJugador2 < 500)
             {
                 cout << "Puntuacion actual del jugador 2: " << puntuacionJugador2 << " (Necesitas 500 para ganar)" << endl;
