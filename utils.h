@@ -255,7 +255,9 @@ int unJugador(int& mp, string& mj)
 
             }
         }
+        if(MAX1!=0){
         puntuacion += MAX1*10;
+        }
         }
         // FIN CODIGO TRIO X  **** FIN CODIGO TRIO X *****
 
