@@ -454,7 +454,6 @@ int dosJugadores()
         }
         if(MAX1!=0){
         puntuacionJugador1 += MAX1*10;
-        cout<<"Numero que multiplica trio x" <<MAX1 <<endl;
         }
         }
 
@@ -552,7 +551,6 @@ int dosJugadores()
         }
         if(MAX1!=0){
         puntuacionJugador2 += MAX1*10;
-        cout<<"Numero que multiplica trio x" <<MAX1 <<endl;
         }
         }
 // CODIGO TRIO X  CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
