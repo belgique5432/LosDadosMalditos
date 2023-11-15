@@ -339,7 +339,7 @@ int mayorPuntaje(int& mp, string& mj)
 int dosJugadores()
 {
     string jugador1, jugador2;
-    int puntuacionJugador1 = 0, puntuacionJugador2 = 0, contadorTiradas = 0, rondas = 0;
+    int puntuacionJugador1 = 0, puntuacionJugador2 = 0, contadorTiradas = 0, rondas = 0, banderaV = 0;
     bool bandera = true;
 
 
@@ -352,7 +352,7 @@ int dosJugadores()
     {
 
         int contadorEscalera = 0, sexteto = 0, contador = 0;
-        int contadorTrio = 0, TX=0, MAX1=0, MAX2=0;
+        int contadorTrio = 0, TX=0, MAX1=0, MAX2=0, banderaV = 0;
 
 
         // Reinicia los contadores en cada iteración
@@ -398,41 +398,65 @@ int dosJugadores()
                 {
                     contadorEscalera++;
                 }
-                if (dado[i] == 6) {
-                    sexteto++;
-                }
 
             }
+
+            //sextetos
+
+        bool sonIguales = true;
+    for (int i = 1; i < 6; i++) {
+        if (dado[i] != dado[0]) {
+            sonIguales = false;
+        }
+    }
+
+        if (sonIguales==true) {
+                banderaV=1;
+                if(dado[0]==6){
+                cout <<endl<<"Sexteto de Seis! :c Tu Score volvera a 0 "<<endl;
+                puntuacionJugador1=0;
+                }else{
+                cout<<endl<<"Puntuacion actual "<<puntuacionJugador1<<endl;
+        cout << "Sexteto de "<<dado[0]<<" Por lo que "<<dado[0]<<" se multiplicara X 50"<<endl;
+        puntuacionJugador1+=dado[0]*50;
+        }
+    }
 // CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
-            for (int N = 1; N < 7; N++)
+        if(sonIguales==false){
+        for (int N = 0; N < 6; N++)
+        {
+            contadorTrio= 0;
+            for(int D = 0; D <= 5; D++)
             {
-                contadorTrio=0;
-                for(int D = 0; D <= 5; D++)
+                if (dado[D] == dado[N])
                 {
-                    if (dado[D] == N)
-                    {
-                        contadorTrio ++;
-                    }
-                    if(contadorTrio==3)
-                    {
-                        if (MAX1==0)
-                        {
-                            MAX1=dado[D];
-                            contadorTrio = 0;
-                        }
-                        else
-                        {
-                            MAX2=dado[D];
-                        }
-                        if(MAX2>MAX1)
-                        {
-                            MAX1=MAX2;
-                        }
-                    }
-
+                    contadorTrio ++;
                 }
+                if(contadorTrio==3)
+                {
+                banderaV=1;
+                    if (MAX1==0)
+                    {
+                        MAX1=dado[D];
+                        contadorTrio = 0;
+                    }
+                    else
+                    {
+                        MAX2=dado[D];
+                    }
+                    if(MAX2>MAX1)
+                    {
+                        MAX1=MAX2;
+                    }
+                }
+
             }
-            puntuacionJugador1 += MAX1*10;
+        }
+        if(MAX1!=0){
+        puntuacionJugador1 += MAX1*10;
+        cout<<"Numero que multiplica trio x" <<MAX1 <<endl;
+        }
+        }
 
 // CODIGO TRIO X  CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
 
@@ -447,19 +471,12 @@ int dosJugadores()
                 puntuacionJugador1 = 501;
             }
 
-            if (contadorTrio < 3)
-            {
-                for (int x = 0; x < 6; x++)
-                {
-                    puntuacionJugador1+= dado[x];
-                }
-            }
-
-            if (sexteto == 6)
-            {
-                cout<<"Sexteto! la puntuacion del jugador 1 volvera a 0";
-                puntuacionJugador1 = 0;
-            }
+        if(banderaV==0){
+        for (int i = 0; i <= 5; i++)
+        {
+                puntuacionJugador1+=dado[i];
+        }
+        }
 
 
 
@@ -482,40 +499,62 @@ int dosJugadores()
                 {
                     contadorEscalera++;
                 }
-                if (dado[i] == 6)
-                {
-                    sexteto++;
-                }
             }
+
+                    bool sonIguales = true;
+    for (int i = 1; i < 6; i++) {
+        if (dado[i] != dado[0]) {
+            sonIguales = false;
+        }
+    }
+
+        if (sonIguales==true) {
+                banderaV=1;
+                if(dado[0]==6){
+                cout <<endl<<"Sexteto de Seis! :c Tu Score volvera a 0 "<<endl;
+                puntuacionJugador2=0;
+                }else{
+                cout<<endl<<"Puntuacion actual "<<puntuacionJugador2<<endl;
+        cout << "Sexteto de "<<dado[0]<<" Por lo que "<<dado[0]<<" se multiplicara X 50"<<endl;
+        puntuacionJugador2+=dado[0]*50;
+        }
+    }
 // CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
-            for (int N = 1; N < 7; N++)
+        if(sonIguales==false){
+        for (int N = 0; N < 6; N++)
+        {
+            contadorTrio= 0;
+            for(int D = 0; D <= 5; D++)
             {
-                for(int D = 0; D <= 5; D++)
+                if (dado[D] == dado[N])
                 {
-                    if (dado[D] == N)
-                    {
-                        contadorTrio ++;
-                    }
-                    if(contadorTrio==3)
-                    {
-                        if (MAX1==0)
-                        {
-                            MAX1=dado[D];
-                        }
-                        else
-                        {
-                            MAX2=dado[D];
-                        }
-                        if(MAX2>MAX1)
-                        {
-                            MAX1=MAX2;
-                        }
-                    }
-
+                    contadorTrio ++;
                 }
-            }
-            puntuacionJugador2 += MAX1*10;
+                if(contadorTrio==3)
+                {
+                banderaV=1;
+                    if (MAX1==0)
+                    {
+                        MAX1=dado[D];
+                        contadorTrio = 0;
+                    }
+                    else
+                    {
+                        MAX2=dado[D];
+                    }
+                    if(MAX2>MAX1)
+                    {
+                        MAX1=MAX2;
+                    }
+                }
 
+            }
+        }
+        if(MAX1!=0){
+        puntuacionJugador2 += MAX1*10;
+        cout<<"Numero que multiplica trio x" <<MAX1 <<endl;
+        }
+        }
 // CODIGO TRIO X  CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
 
 
@@ -529,20 +568,12 @@ int dosJugadores()
                 puntuacionJugador2 = 501;
             }
 
-            if (contadorTrio < 3)
-            {
-                for (int x = 0; x < 6; x++)
-                {
-                    puntuacionJugador2+= dado[x];
-                }
-            }
-
-            if (sexteto == 6)
-            {
-                cout<<"Sexteto! La puntuacion del jugador 2 volvera a 0" <<endl;
-                puntuacionJugador2 = 0;
-
-            }
+        if(banderaV==0){
+        for (int i = 0; i <= 5; i++)
+        {
+                puntuacionJugador2+=dado[i];
+        }
+        }
 
 
 
