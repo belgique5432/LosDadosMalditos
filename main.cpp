@@ -9,16 +9,15 @@
 using namespace std;
 
 #include "utils.h"
-    int dado[6];
-    int mp;
-    string mj;
+int dado[6];
+int mp;
+string mj;
 
-
-
-
-int main(){
-    while (true) {
-       char opc;
+int main()
+{
+    while (true)
+    {
+        char opc;
 
         // Limpia la pantalla y muestra el menú
         system("cls");
@@ -48,34 +47,34 @@ int main(){
         cin >> opc;
 
         // Evalúa la opción ingresada por el usuario
-        switch (opc) {
-            case '1':
-                // Llama a la función para un jugador
-                unJugador(mp,mj);
-                break;
+        switch (opc)
+        {
+        case '1':
+            // Llama a la función para un jugador
+            unJugador(mp, mj);
+            break;
 
-            case '2':
-                // Llama a la función para dos jugadores (debe estar implementada)
-                dosJugadores();
-                break;
+        case '2':
+            // Llama a la función para dos jugadores (debe estar implementada)
+            dosJugadores(mp, mj);
+            break;
 
-            case '3':
-                // Llama a la función para el mayor puntaje (debe estar implementada)
-                mayorPuntaje(mp,mj);
-                break;
+        case '3':
+            // Llama a la función para el mayor puntaje (debe estar implementada)
+            mayorPuntaje(mp, mj);
+            break;
 
-            case '4':
-                // Sale del programa
-                return 0;
+        case '4':
+            // Sale del programa
+            return 0;
 
-            default:
-                // Mensaje para opciones inválidas
-                rlutil::setColor(rlutil::RED);
-                cout << "Opcion invalida. Intente nuevamente" << endl;
-                rlutil::setColor(rlutil::WHITE);
-                system("pause");
-                break;
-
+        default:
+            // Mensaje para opciones inválidas
+            rlutil::setColor(rlutil::RED);
+            cout << "Opcion invalida. Intente nuevamente" << endl;
+            rlutil::setColor(rlutil::WHITE);
+            system("pause");
+            break;
         }
     }
 }

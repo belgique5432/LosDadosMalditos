@@ -7,6 +7,11 @@
 using namespace std;
 
 extern int dado[];
+
+/*Funcion mostrarDados:
+        Se encarga de imprimir un diseño de dado dependiendo del numero recibido
+        utiliza el dado[i] para eso
+*/
 int mostrarDados()
 {
     rlutil::setColor(rlutil::MAGENTA);
@@ -160,26 +165,29 @@ int mostrarDados()
     rlutil::setColor(rlutil::WHITE);
 }
 
-int unJugador(int& mp, string& mj)
+int unJugador(int &mp, string &mj)
 {
-    string jugador1;
+    string jugador1, ganador;
     int contadorTiradas = 0, puntuacion = 0, rondas = 1, contador;
     int contadorEscalera = 0, banderaV = 0;
-    int contadorTrio = 0, TX=0, MAX1=0, MAX2=0;
+    int contadorTrio = 0, TX = 0, MAX1 = 0, MAX2 = 0;
 
     cout << "Ingrese nombre de jugador: ";
     cin >> jugador1;
 
-    while (puntuacion <= 500)
+    //
+
+    // Bucle principal de unJugador
+
+    while (puntuacion <= 500 && rondas <= 8)
     {
         // Reinicia los contadores en cada iteración
         contadorEscalera = 0;
-        banderaV=0;
-        MAX1=0, MAX2=0;
-
+        banderaV = 0;
+        MAX1 = 0, MAX2 = 0;
 
         srand(time(NULL)); // Inicializa la semilla para la generación de números aleatorios.
-        // CARGA DEL DADO
+        // Carga del dao
         for (int i = 0; i <= 5; i++)
         {
             dado[i] = 1 + rand() % 6;
@@ -188,22 +196,21 @@ int unJugador(int& mp, string& mj)
                 contadorEscalera++;
             }
         }
-        // MUESTRA DEL DADO Y NUMERO DE RONDA
+
         cout << "Ronda: " << rondas << endl;
         contadorTiradas++;
         mostrarDados();
 
+        // VALIDACIONES  **** VALIDACIONES ***** VALIDACIONES ***** VALIDACIONES
 
-// VALIDACIONES  **** VALIDACIONES ***** VALIDACIONES ***** VALIDACIONES
-
-        //CODIGO ESCALERA
+        // Codigo de escalera
         if (contadorEscalera == 6)
         {
             cout << "Victoria por escalera" << endl;
             puntuacion = 501;
         }
 
-        // CODIGO DE SEXTETO X Y 6
+        // Codigo de sexteto x y sexteto
         bool sonIguales = true;
         for (int i = 1; i < 6; i++)
         {
@@ -213,194 +220,205 @@ int unJugador(int& mp, string& mj)
             }
         }
 
-        if (sonIguales==true)
+        if (sonIguales == true)
         {
-            banderaV=1;
-            if(dado[0]==6)
+            banderaV = 1;
+            if (dado[0] == 6)
             {
-                cout <<endl<<"Sexteto de Seis! :c Tu Score volvera a 0 "<<endl;
-                puntuacion=0;
+                cout << endl
+                     << "Sexteto de Seis! :c Tu Score volvera a 0 " << endl;
+                puntuacion = 0;
             }
             else
             {
-                cout<<endl<<"Puntuacion actual "<<puntuacion<<endl;
-                cout << "Sexteto de "<<dado[0]<<" Por lo que "<<dado[0]<<" se multiplicara X 50"<<endl;
-                puntuacion+=dado[0]*50;
+                cout << endl
+                     << "Puntuacion actual " << puntuacion << endl;
+                cout << "Sexteto de " << dado[0] << " Por lo que " << dado[0] << " se multiplicara X 50" << endl;
+                puntuacion += dado[0] * 50;
             }
         }
-        // FIN CICLO SEXTETO
+        // Fin de sexteto
 
-        // CODIGO TRIO X ***** CODIGO TRIO X
-        if(sonIguales==false)
+        // Codigo de Trio x
+        if (sonIguales == false)
         {
             for (int N = 0; N < 6; N++)
             {
-                contadorTrio= 0;
-                for(int D = 0; D <= 5; D++)
+                contadorTrio = 0;
+                for (int D = 0; D <= 5; D++)
                 {
                     if (dado[D] == dado[N])
                     {
-                        contadorTrio ++;
+                        contadorTrio++;
                     }
-                    if(contadorTrio==3)
+                    if (contadorTrio == 3)
                     {
-                        banderaV=1;
-                        if (MAX1==0)
+                        banderaV = 1;
+                        if (MAX1 == 0)
                         {
-                            MAX1=dado[D];
+                            MAX1 = dado[D];
                             contadorTrio = 0;
                         }
                         else
                         {
-                            MAX2=dado[D];
+                            MAX2 = dado[D];
                             contadorTrio = 0;
                         }
-                        if(MAX2>MAX1)
+                        if (MAX2 > MAX1)
                         {
-                            MAX1=MAX2;
+                            MAX1 = MAX2;
                         }
                     }
-
                 }
             }
-            if(MAX1!=0)
+            if (MAX1 != 0)
             {
-                puntuacion += MAX1*10;
+                puntuacion += MAX1 * 10;
             }
         }
-        // FIN CODIGO TRIO X  **** FIN CODIGO TRIO X *****
+        // Fin del codigo de Trio x
 
-        //SI NINGUNA VALIDACION SE CUMPLIO SUMA LOS DADOS
-        if(banderaV==0)
+        // Si no se cumple ninguna condicion se suman los dados
+        if (banderaV == 0)
         {
             for (int i = 0; i <= 5; i++)
             {
-                puntuacion+=dado[i];
+                puntuacion += dado[i];
             }
         }
-// FIN VALIDACIONES  **** FIN VALIDACIONES ***** FIN VALIDACIONES ***** FIN VALIDACIONES
-
+        // FIN VALIDACIONES  **** FIN VALIDACIONES ***** FIN VALIDACIONES ***** FIN VALIDACIONES
 
         // Verifica la puntuación y continúa o regresa al menú
         if (puntuacion < 500)
         {
-            cout <<endl<< "Puntuacion actual: " << puntuacion << " (Necesitas 500 para ganar)" << endl;
+            cout << endl
+                 << "Puntuacion actual: " << puntuacion << " (Necesitas 500 para ganar)" << endl;
             system("pause");
         }
 
-        //MOSTRADOR DE CAMBIO DE RONDA
+        // Muestra el cambio de las rondas
+
         if (contadorTiradas % 3 == 0)
         {
             rondas++;
             system("cls");
             rlutil::setColor(rlutil::BLUE);
-            rlutil::locate(44,3);
-            cout<<"-----------------------------------------";
-            rlutil::locate(44,5);
-            cout<<" jugador "<<jugador1<<" suiguente ronda "<<rondas<< " puntaje "<<puntuacion<<endl;
-            rlutil::locate(44,7);
-            cout<<"-----------------------------------------";
-            cout<<endl;
-            rlutil::locate(44,8);
+            rlutil::locate(44, 3);
+            cout << "-----------------------------------------";
+            rlutil::locate(44, 5);
+            cout << " jugador " << jugador1 << " suiguente ronda " << rondas << " puntaje " << puntuacion << endl;
+            rlutil::locate(44, 7);
+            cout << "-----------------------------------------";
+            cout << endl;
+            rlutil::locate(44, 8);
             system("pause");
             rlutil::setColor(rlutil::WHITE);
             system("cls");
-
         }
-    } //CIERRE DEL WHILE
+    }
 
+    // Carga la puntuacion a mp y define al jugador de la puntuacion
 
-    //CARGA EL MAYOR PUNTAJE A SCORE SI ESTE ES MAYOR A MP
-    if(puntuacion>mp)
+    if (puntuacion > mp)
     {
         mp = puntuacion;
         mj = jugador1;
     }
+    //
 
-    return 0; // Puedes devolver un valor si es necesario
+    // Muestra el ganador de la partida y la cantidad de rondas que tardo en ganar
+
+    if (puntuacion >= 500)
+    {
+        ganador = jugador1;
+        system("cls");
+        cout << "El ganador es: " << jugador1 << " le tomo: " << rondas << " ganar" << endl;
+        system("pause");
+        system("cls");
+    }
+
+    return 0;
 }
 
 // ********* FIN FUNCION UN JUGADAOR ***********  FIN FUNCION UN JUGADAOR ***********  FIN FUNCION UN JUGADAOR ***********
-// ********* FIN FUNCION UN JUGADAOR ***********  FIN FUNCION UN JUGADAOR ***********  FIN FUNCION UN JUGADAOR ***********
-// ********* FIN FUNCION UN JUGADAOR ***********  FIN FUNCION UN JUGADAOR ***********  FIN FUNCION UN JUGADAOR ***********
 
-int mayorPuntaje(int& mp, string& mj)
+// Funcion de mayor puntaje
+
+int mayorPuntaje(int &mp, string &mj)
 {
-    if(mp==0)
+
+    if (mp == 0)
     {
-        cout<<"Aun no se ha registrado ningun puntaje"<<endl;
+        cout << "Aun no se ha registrado ningun puntaje" << endl;
         system("pause");
     }
     else
     {
-        cout << "Jugador con mayor puntaje registrado es: "<<mj<< endl;
-        cout << "Puntaje: "<<mp<< endl;
+        cout << "Jugador con mayor puntaje registrado es: " << mj << endl;
+        cout << "Puntaje: " << mp << endl;
         system("pause");
     }
-
-
 }
 
 // ********* FIN FUNCION MAYOR PUNTAJE ***********  FIN FUNCION MAYOR PUNTAJE ***********  FIN FUNCION MAYOR PUNTAJE ***********
-// ********* FIN FUNCION MAYOR PUNTAJE ***********  FIN FUNCION MAYOR PUNTAJE ***********  FIN FUNCION MAYOR PUNTAJE ***********
-// ********* FIN FUNCION MAYOR PUNTAJE ***********  FIN FUNCION MAYOR PUNTAJE ***********  FIN FUNCION MAYOR PUNTAJE ***********
 
+//****************FUNCION DE DOS JUGADORES *****************
 
-int dosJugadores()
+int dosJugadores(int &mp, string &mj)
 {
-    string jugador1, jugador2;
+    string jugador1, jugador2, ganador;
     int puntuacionJugador1 = 0, puntuacionJugador2 = 0, contadorTiradas = 0, rondas = 0, banderaV = 0;
     bool bandera = true;
 
+    cout << "Ingrese nombre del jugador 1: ";
+    cin >> jugador1;
+    cout << "Ingrese nombre del jugador 2: ";
+    cin >> jugador2;
 
-    cout<<"Ingrese nombre del jugador 1: ";
-    cin>>jugador1;
-    cout<<"Ingrese nombre del jugador 2: ";
-    cin>>jugador2;
-
-    while (puntuacionJugador1 <= 500 || puntuacionJugador2 <= 500)
+    while (puntuacionJugador1 <= 500 || puntuacionJugador2 <= 500 && rondas <= 8)
     {
 
         int contadorEscalera = 0, sexteto = 0, contador = 0;
-        int contadorTrio = 0, TX=0, MAX1=0, MAX2=0, banderaV = 0;
-
+        int contadorTrio = 0, TX = 0, MAX1 = 0, MAX2 = 0, banderaV = 0;
 
         // Reinicia los contadores en cada iteración
         contadorEscalera = 0;
         sexteto = 0;
-        MAX1=0, MAX2=0;
+        MAX1 = 0, MAX2 = 0;
+
+        // Muestra los carteles entre rondas para saber la puntuacion y suma las rondas
 
         if (contadorTiradas % 6 == 0)
         {
-            if (rondas != 0)
+            if (rondas != 0) // Verifica que no sea la primer ronda para no tirar el cartel al inicio del juego
             {
                 system("cls");
                 rlutil::setColor(rlutil::YELLOW);
-                rlutil::locate(44,3);
-                cout<<"-----------------------------------------";
-                rlutil::locate(44,5);
-                cout<<" suiguente ronda "<<rondas<<endl;
-                rlutil::locate(44,6);
-                cout<<" jugador "<<jugador1<< " puntaje "<<puntuacionJugador1<<endl;
-                rlutil::locate(44,7);
-                cout<<" jugador "<<jugador2<< " puntaje "<<puntuacionJugador2<<endl;
-                rlutil::locate(44,8);
-                cout<<"-----------------------------------------";
-                cout<<endl;
-                rlutil::locate(44,9);
+                rlutil::locate(44, 3);
+                cout << "-----------------------------------------";
+                rlutil::locate(44, 5);
+                cout << " suiguente ronda " << rondas << endl;
+                rlutil::locate(44, 6);
+                cout << " jugador " << jugador1 << " puntaje " << puntuacionJugador1 << endl;
+                rlutil::locate(44, 7);
+                cout << " jugador " << jugador2 << " puntaje " << puntuacionJugador2 << endl;
+                rlutil::locate(44, 8);
+                cout << "-----------------------------------------";
+                cout << endl;
+                rlutil::locate(44, 9);
                 system("pause");
                 rlutil::setColor(rlutil::WHITE);
                 system("cls");
-
             }
             rondas++;
-
         }
 
-
-        if (bandera)
+        if (bandera) // verifica el valor de la bandera para saber que jugador tira el dado
         {
-            cout<<endl<<endl<<"Jugador 1"<<endl;
+            cout << endl
+                 << endl
+                 << "Jugador 1" << endl;
+
             srand(time(NULL)); // Inicializa la semilla para la generación de números aleatorios.
 
             for (int i = 0; i <= 5; i++)
@@ -410,10 +428,9 @@ int dosJugadores()
                 {
                     contadorEscalera++;
                 }
-
             }
 
-            //sextetos
+            // Sexteto x y sexteto
 
             bool sonIguales = true;
             for (int i = 1; i < 6; i++)
@@ -424,66 +441,69 @@ int dosJugadores()
                 }
             }
 
-            if (sonIguales==true)
+            if (sonIguales == true)
             {
-                banderaV=1;
-                if(dado[0]==6)
+                banderaV = 1;
+                if (dado[0] == 6)
                 {
-                    cout <<endl<<"Sexteto de Seis! :c Tu Score volvera a 0 "<<endl;
-                    puntuacionJugador1=0;
+                    cout << endl
+                         << "Sexteto de Seis! :c Tu Score volvera a 0 " << endl;
+                    puntuacionJugador1 = 0;
                 }
                 else
                 {
-                    cout<<endl<<"Puntuacion actual "<<puntuacionJugador1<<endl;
-                    cout << "Sexteto de "<<dado[0]<<" Por lo que "<<dado[0]<<" se multiplicara X 50"<<endl;
-                    puntuacionJugador1+=dado[0]*50;
+                    cout << endl
+                         << "Puntuacion actual " << puntuacionJugador1 << endl;
+                    cout << "Sexteto de " << dado[0] << " Por lo que " << dado[0] << " se multiplicara X 50" << endl;
+                    puntuacionJugador1 += dado[0] * 50;
                 }
             }
-// CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
-            if(sonIguales==false)
+
+            // Codigo de Trio X
+
+            if (sonIguales == false)
             {
                 for (int N = 0; N < 6; N++)
                 {
-                    contadorTrio= 0;
-                    for(int D = 0; D <= 5; D++)
+                    contadorTrio = 0;
+                    for (int D = 0; D <= 5; D++)
                     {
                         if (dado[D] == dado[N])
                         {
-                            contadorTrio ++;
+                            contadorTrio++;
                         }
-                        if(contadorTrio==3)
+                        if (contadorTrio == 3)
                         {
-                            banderaV=1;
-                            if (MAX1==0)
+                            banderaV = 1;
+                            if (MAX1 == 0)
                             {
-                                MAX1=dado[D];
+                                MAX1 = dado[D];
                                 contadorTrio = 0;
                             }
                             else
                             {
-                                MAX2=dado[D];
+                                MAX2 = dado[D];
                                 contadorTrio = 0;
                             }
-                            if(MAX2>MAX1)
+                            if (MAX2 > MAX1)
                             {
-                                MAX1=MAX2;
+                                MAX1 = MAX2;
                             }
                         }
-
                     }
                 }
-                if(MAX1!=0)
+                if (MAX1 != 0)
                 {
-                    puntuacionJugador1 += MAX1*10;
+                    puntuacionJugador1 += MAX1 * 10;
                 }
             }
 
-// CODIGO TRIO X  CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
-
-
+            // Muestra los dados y las rondas
 
             cout << "Ronda: " << rondas << endl;
             mostrarDados();
+
+            // Verifica si se cumple la condicion para la victoria por escalera
 
             if (contadorEscalera == 6)
             {
@@ -491,26 +511,27 @@ int dosJugadores()
                 puntuacionJugador1 = 501;
             }
 
-            if(banderaV==0)
+            if (banderaV == 0) // Si no se cumple ninguna condicion se suma el valor de los dados
             {
                 for (int i = 0; i <= 5; i++)
                 {
-                    puntuacionJugador1+=dado[i];
+                    puntuacionJugador1 += dado[i];
                 }
             }
-
-
 
             // Verifica la puntuación y continúa o regresa al menú
             if (puntuacionJugador1 < 500)
             {
-                cout <<endl<< "Puntuacion actual del jugador 1: " << puntuacionJugador1 << " (Necesitas 500 para ganar)" << endl;
+                cout << endl
+                     << "Puntuacion actual del jugador 1: " << puntuacionJugador1 << " (Necesitas 500 para ganar)" << endl;
                 system("pause");
             }
         }
         else
         {
-            cout<<endl<<endl<<"Jugador 2"<<endl;
+            cout << endl
+                 << endl
+                 << "Jugador 2" << endl;
 
             srand(time(NULL)); // Inicializa la semilla para la generación de números aleatorios.
             for (int i = 0; i <= 5; i++)
@@ -522,6 +543,8 @@ int dosJugadores()
                 }
             }
 
+            // Inicio de sexteto x y sexteto
+
             bool sonIguales = true;
             for (int i = 1; i < 6; i++)
             {
@@ -531,62 +554,64 @@ int dosJugadores()
                 }
             }
 
-            if (sonIguales==true)
+            if (sonIguales == true)
             {
-                banderaV=1;
-                if(dado[0]==6)
+                banderaV = 1;
+                if (dado[0] == 6)
                 {
-                    cout <<endl<<"Sexteto de Seis! :c Tu Score volvera a 0 "<<endl;
-                    puntuacionJugador2=0;
+                    cout << endl
+                         << "Sexteto de Seis! :c Tu Score volvera a 0 " << endl;
+                    puntuacionJugador2 = 0;
                 }
                 else
                 {
-                    cout<<endl<<"Puntuacion actual "<<puntuacionJugador2<<endl;
-                    cout << "Sexteto de "<<dado[0]<<" Por lo que "<<dado[0]<<" se multiplicara X 50"<<endl;
-                    puntuacionJugador2+=dado[0]*50;
+                    cout << endl
+                         << "Puntuacion actual " << puntuacionJugador2 << endl;
+                    cout << "Sexteto de " << dado[0] << " Por lo que " << dado[0] << " se multiplicara X 50" << endl;
+                    puntuacionJugador2 += dado[0] * 50;
                 }
             }
-// CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
-            if(sonIguales==false)
+
+            // Codigo de Trio X
+
+            if (sonIguales == false)
             {
                 for (int N = 0; N < 6; N++)
                 {
-                    contadorTrio= 0;
-                    for(int D = 0; D <= 5; D++)
+                    contadorTrio = 0;
+                    for (int D = 0; D <= 5; D++)
                     {
                         if (dado[D] == dado[N])
                         {
-                            contadorTrio ++;
+                            contadorTrio++;
                         }
-                        if(contadorTrio==3)
+                        if (contadorTrio == 3)
                         {
-                            banderaV=1;
-                            if (MAX1==0)
+                            banderaV = 1;
+                            if (MAX1 == 0)
                             {
-                                MAX1=dado[D];
+                                MAX1 = dado[D];
                                 contadorTrio = 0;
                             }
                             else
                             {
-                                MAX2=dado[D];
+                                MAX2 = dado[D];
                                 contadorTrio = 0;
                             }
-                            if(MAX2>MAX1)
+                            if (MAX2 > MAX1)
                             {
-                                MAX1=MAX2;
+                                MAX1 = MAX2;
                             }
                         }
-
                     }
                 }
-                if(MAX1!=0)
+                if (MAX1 != 0)
                 {
-                    puntuacionJugador2 += MAX1*10;
+                    puntuacionJugador2 += MAX1 * 10;
                 }
             }
-// CODIGO TRIO X  CODIGO TRIO X CODIGO TRIO X CODIGO TRIO X
 
-
+            // Muestra los dados y las rondas
 
             cout << "Ronda: " << rondas << endl;
             mostrarDados();
@@ -597,26 +622,59 @@ int dosJugadores()
                 puntuacionJugador2 = 501;
             }
 
-            if(banderaV==0)
+            if (banderaV == 0) // Si no se cumple ninguna condicion suma los valores de los dados
             {
                 for (int i = 0; i <= 5; i++)
                 {
-                    puntuacionJugador2+=dado[i];
+                    puntuacionJugador2 += dado[i];
                 }
             }
 
-
-
             // Verifica la puntuación y continúa o regresa al menú
+
             if (puntuacionJugador2 < 500)
             {
-                cout <<endl<< "Puntuacion actual del jugador 2: " << puntuacionJugador2 << " (Necesitas 500 para ganar)" << endl;
+                cout << endl
+                     << "Puntuacion actual del jugador 2: " << puntuacionJugador2 << " (Necesitas 500 para ganar)" << endl;
                 system("pause");
             }
         }
+
+        // Suma las tiradas de los dados y cambia la bandera para el cambio de jugador
+
         contadorTiradas++;
         bandera = !bandera;
     }
 
+    // Setea la puntuacion maxima con el nombre del jugador que la posee y que puntuacion consiguio
 
+    if (puntuacionJugador1 > mp)
+    {
+        mp = puntuacionJugador1;
+        mj = jugador1;
+    }
+    if (puntuacionJugador2 > mp)
+    {
+        mp = puntuacionJugador2;
+        mj = jugador2;
+    }
+
+    // Muestra el ganador de la partida y la cantidad de rondas que tardo en ganar
+
+    if (puntuacionJugador1 >= 500 & puntuacionJugador1 > puntuacionJugador2)
+    {
+        ganador = jugador1;
+        system("cls");
+        cout << "El ganador es: " << jugador1 << " le tomo: " << rondas << " ganar" << endl;
+        system("pause");
+        system("cls");
+    }
+    if (puntuacionJugador2 >= 500 && puntuacionJugador2 > puntuacionJugador1)
+    {
+        ganador = jugador1;
+        system("cls");
+        cout << "El ganador es: " << jugador2 << " le tomo: " << rondas << " ganar" << endl;
+        system("pause");
+        system("cls");
+    }
 }
