@@ -9,9 +9,7 @@
 using namespace std;
 
 #include "utils.h"
-int dado[6];
-int mp;
-string mj;
+
 
 int main()
 {
@@ -23,6 +21,7 @@ int main()
         system("cls");
 
         // Imprime el título del juego
+        rlutil::setBackgroundColor(rlutil::BLACK);
         rlutil::setColor(rlutil::MAGENTA);
         rlutil::locate(44, 5);
         cout << "El dados malditos" << endl;
@@ -65,6 +64,10 @@ int main()
             break;
 
         case '4':
+               rlutil::setColor(rlutil::YELLOW);
+                cout << "De parte del Grupo 23, les damos las gracias por jugar a elDados Malditos " << endl;
+                rlutil::setColor(rlutil::WHITE);
+                system("pause");
             // Sale del programa
             return 0;
 
