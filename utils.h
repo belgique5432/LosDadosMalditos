@@ -6,7 +6,10 @@
 
 using namespace std;
 
-extern int dado[];
+extern int dado[6];
+int dado[6];
+int mp;
+string mj;
 
 /*Funcion mostrarDados:
         Se encarga de imprimir un diseño de dado dependiendo del numero recibido
@@ -197,17 +200,26 @@ int unJugador(int &mp, string &mj)
             }
         }
 
-        cout << "Ronda: " << rondas << endl;
-        contadorTiradas++;
-        mostrarDados();
+       cout << "Ronda: " << rondas<<" Jugador: "<<jugador1 << endl;
+		contadorTiradas++;
+		mostrarDados();
 
         // VALIDACIONES  **** VALIDACIONES ***** VALIDACIONES ***** VALIDACIONES
 
         // Codigo de escalera
         if (contadorEscalera == 6)
         {
-            cout << "Victoria por escalera" << endl;
-            puntuacion = 501;
+           	rlutil::setColor(rlutil::RED);
+			cout<<"-----------------------------------------";
+			rlutil::locate(48,5);
+			cout << "Victoria por escalera" << endl;
+			rlutil::locate(44,7);
+			cout<<"-----------------------------------------";
+			cout<<endl;
+			rlutil::locate(44,8);
+			rlutil::setColor(rlutil::WHITE);
+			system("pause");
+			break;
         }
 
         // Codigo de sexteto x y sexteto
@@ -225,9 +237,14 @@ int unJugador(int &mp, string &mj)
             banderaV = 1;
             if (dado[0] == 6)
             {
-                cout << endl
-                     << "Sexteto de Seis! :c Tu Score volvera a 0 " << endl;
-                puntuacion = 0;
+	rlutil::setColor(rlutil::RED);
+				cout<<"-----------------------------------------";
+				cout<<endl;
+				cout<<" Sexteto de Seis! :c puntuacion volvera a 0 "<<endl;
+				cout<<"-----------------------------------------";
+				cout<<endl;
+				rlutil::setColor(rlutil::WHITE);
+				puntuacion = 0;
             }
             else
             {
@@ -273,6 +290,12 @@ int unJugador(int &mp, string &mj)
             }
             if (MAX1 != 0)
             {
+                rlutil::setColor(rlutil::RED);
+				cout<<endl<<"-----------------------------------------"<<endl;
+				cout<<"Salio un -TRIOX++- GENIAL"<<endl;
+				cout<<"-----------------------------------------";
+				cout<<endl;
+				rlutil::setColor(rlutil::WHITE);
                 puntuacion += MAX1 * 10;
             }
         }
@@ -302,7 +325,7 @@ int unJugador(int &mp, string &mj)
         {
             rondas++;
             system("cls");
-            rlutil::setColor(rlutil::BLUE);
+            rlutil::setColor(rlutil::YELLOW);
             rlutil::locate(44, 3);
             cout << "-----------------------------------------";
             rlutil::locate(44, 5);
@@ -316,6 +339,21 @@ int unJugador(int &mp, string &mj)
             system("cls");
         }
     }
+            system("cls");
+			rlutil::setColor(rlutil::MAGENTA);
+			rlutil::locate(44,3);
+			cout<<"-----------------------------------------";
+			rlutil::locate(48,5);
+			cout<<"VICTORIA USTED GANO "<<endl;
+			rlutil::locate(48,6);
+			cout<<" con "<<puntuacion<<" puntos "<<endl;
+			rlutil::locate(44,7);
+			cout<<"-----------------------------------------";
+			cout<<endl;
+			rlutil::locate(44,8);
+			system("pause");
+			rlutil::setColor(rlutil::WHITE);
+			system("cls");
 
     // Carga la puntuacion a mp y define al jugador de la puntuacion
 
@@ -349,14 +387,37 @@ int mayorPuntaje(int &mp, string &mj)
 
     if (mp == 0)
     {
-        cout << "Aun no se ha registrado ningun puntaje" << endl;
-        system("pause");
+       system("cls");
+		rlutil::setColor(rlutil::RED);
+		rlutil::locate(44,3);
+		cout<<"-----------------------------------------";
+		rlutil::locate(44,5);
+		cout<<"Aun no se ha registrado ningun puntaje"<<endl;
+		rlutil::locate(44,7);
+		cout<<"-----------------------------------------";
+		cout<<endl;
+		rlutil::locate(44,8);
+		system("pause");
+		rlutil::setColor(rlutil::WHITE);
+
     }
     else
     {
-        cout << "Jugador con mayor puntaje registrado es: " << mj << endl;
-        cout << "Puntaje: " << mp << endl;
-        system("pause");
+       system("cls");
+		rlutil::setColor(rlutil::GREEN);
+		rlutil::locate(44,3);
+		cout<<"-----------------------------------------";
+		rlutil::locate(44,5);
+		cout << "Jugador con mayor puntaje registrado es: "<<mj<< endl;
+		rlutil::locate(44,7);
+		cout << "Puntaje: "<<mp<< endl;
+		rlutil::locate(44,8);
+		cout<<"-----------------------------------------";
+		cout<<endl;
+		rlutil::locate(44,9);
+		system("pause");
+		rlutil::setColor(rlutil::WHITE);
+
     }
 }
 
@@ -446,9 +507,14 @@ int dosJugadores(int &mp, string &mj)
                 banderaV = 1;
                 if (dado[0] == 6)
                 {
-                    cout << endl
-                         << "Sexteto de Seis! :c Tu Score volvera a 0 " << endl;
-                    puntuacionJugador1 = 0;
+rlutil::setColor(rlutil::RED);
+				cout<<"-----------------------------------------";
+				cout<<endl;
+				cout<<" Sexteto de Seis! :c puntuacion volvera a 0 "<<endl;
+				cout<<"-----------------------------------------";
+				cout<<endl;
+				rlutil::setColor(rlutil::WHITE);
+				puntuacionJugador1 = 0;
                 }
                 else
                 {
@@ -494,6 +560,12 @@ int dosJugadores(int &mp, string &mj)
                 }
                 if (MAX1 != 0)
                 {
+                  rlutil::setColor(rlutil::LIGHTMAGENTA);
+				cout<<endl<<"-----------------------------------------"<<endl;
+				cout<<"Salio un -TRIOX++- GENIAL"<<endl;
+				cout<<"-----------------------------------------";
+				cout<<endl;
+				rlutil::setColor(rlutil::WHITE);
                     puntuacionJugador1 += MAX1 * 10;
                 }
             }
@@ -559,9 +631,14 @@ int dosJugadores(int &mp, string &mj)
                 banderaV = 1;
                 if (dado[0] == 6)
                 {
-                    cout << endl
-                         << "Sexteto de Seis! :c Tu Score volvera a 0 " << endl;
-                    puntuacionJugador2 = 0;
+rlutil::setColor(rlutil::RED);
+				cout<<"-----------------------------------------";
+				cout<<endl;
+				cout<<" Sexteto de Seis! :c puntuacion volvera a 0 "<<endl;
+				cout<<"-----------------------------------------";
+				cout<<endl;
+				rlutil::setColor(rlutil::WHITE);
+                puntuacionJugador2 = 0;
                 }
                 else
                 {
@@ -607,7 +684,14 @@ int dosJugadores(int &mp, string &mj)
                 }
                 if (MAX1 != 0)
                 {
-                    puntuacionJugador2 += MAX1 * 10;
+                 rlutil::setColor(rlutil::RED);
+				cout<<endl<<"-----------------------------------------"<<endl;
+				cout<<"Salio un -TRIOX++- GENIAL"<<endl;
+				cout<<"-----------------------------------------";
+				cout<<endl;
+				rlutil::setColor(rlutil::WHITE);
+
+                puntuacionJugador2 += (MAX1 * 10);
                 }
             }
 
@@ -618,8 +702,20 @@ int dosJugadores(int &mp, string &mj)
 
             if (contadorEscalera == 6)
             {
-                cout << "Victoria por escalera" << endl;
-                puntuacionJugador2 = 501;
+
+rlutil::locate(44,3);
+			rlutil::setColor(rlutil::RED);
+			cout<<"-----------------------------------------";
+			rlutil::locate(48,5);
+			cout << "Victoria por escalera" << endl;
+			rlutil::locate(44,7);
+			cout<<"-----------------------------------------";
+			cout<<endl;
+			rlutil::locate(44,8);
+			rlutil::setColor(rlutil::WHITE);
+			system("pause");
+			break;
+
             }
 
             if (banderaV == 0) // Si no se cumple ninguna condicion suma los valores de los dados
@@ -664,17 +760,38 @@ int dosJugadores(int &mp, string &mj)
     if (puntuacionJugador1 >= 500 & puntuacionJugador1 > puntuacionJugador2)
     {
         ganador = jugador1;
-        system("cls");
-        cout << "El ganador es: " << jugador1 << " le tomo: " << rondas << " ganar" << endl;
-        system("pause");
-        system("cls");
+         rlutil::setBackgroundColor(rlutil::LIGHTMAGENTA);
+
+            system("cls");
+			rlutil::setColor(rlutil::GREEN);
+			rlutil::locate(44,3);
+			cout<<"-----------------------------------------";
+			rlutil::locate(44,5);
+			cout << "El ganador es: " << jugador1 << " le tomo: " << rondas << " ganar" << endl;
+			rlutil::locate(44,7);
+			cout<<"-----------------------------------------";
+			cout<<endl;
+			rlutil::locate(44,8);
+			system("pause");
+			rlutil::setColor(rlutil::WHITE);
+			system("cls");
     }
     if (puntuacionJugador2 >= 500 && puntuacionJugador2 > puntuacionJugador1)
     {
         ganador = jugador1;
-        system("cls");
-        cout << "El ganador es: " << jugador2 << " le tomo: " << rondas << " ganar" << endl;
-        system("pause");
-        system("cls");
+         rlutil::setBackgroundColor(rlutil::CYAN);
+      system("cls");
+			rlutil::setColor(rlutil::MAGENTA);
+			rlutil::locate(44,3);
+			cout<<"-----------------------------------------";
+			rlutil::locate(44,5);
+			 cout << "El ganador es: " << jugador2 << " le tomo: " << rondas << " ganar" << endl;
+			rlutil::locate(44,7);
+			cout<<"-----------------------------------------";
+			cout<<endl;
+			rlutil::locate(44,8);
+			system("pause");
+			rlutil::setColor(rlutil::WHITE);
+			system("cls");
     }
 }
