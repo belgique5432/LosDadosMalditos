@@ -214,8 +214,8 @@ int unJugador(int& mp, string& mj)
             srand(time(NULL));
             for (int c = 0; c < 6; c++)
             {
-                // dado[c] = 1 + rand() % 6;
-                cin>>dado[c];
+                dado[c] = 1 + rand() % 6;
+                // cin>>dado[c];
                 if (dado[c] == c + 1)
             {
                 contadorEscalera++;
@@ -396,6 +396,7 @@ int dosJugadores(int& mp, string& mj)
             cout << "La puntuacion Total de " <<jugador1 <<" es: " << puntuacionFinalJugador1 << " Ronda: " << rondas << endl;
             cout << "La puntuacion Total de " <<jugador2 <<" es: "<< puntuacionFinalJugador2 << " Ronda: " << rondas << endl;
             system("pause");
+            system("cls");
         }
         contador++;
         if (bandera == true)
@@ -425,8 +426,8 @@ int dosJugadores(int& mp, string& mj)
                 srand(time(NULL));
                 for (int c = 0; c < 6; c++)
                 {
-                    // dado[c] = 1 + rand() % 6;
-                    cin>>dado[c];
+                     dado[c] = 1 + rand() % 6;
+                    //cin>>dado[c];
               if (dado[c] == c + 1)
             {
                 contadorEscalera++;
@@ -589,8 +590,8 @@ int dosJugadores(int& mp, string& mj)
                 srand(time(NULL));
                 for (int c = 0; c < 6; c++)
                 {
-                    //  dado[c] = 1 + rand() % 6;
-                    cin>>dado[c];
+                     dado[c] = 1 + rand() % 6;
+                    //cin>>dado[c];
                 if (dado[c] == c + 1)
             {
                 contadorEscalera++;
