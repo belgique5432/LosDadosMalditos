@@ -1,88 +1,80 @@
 #include <iostream>
 #include <cstdlib>
 #include <stdio.h>
+#include "rlutil.h"
 #include <cstring>
 #include <ctime>
 #include <cstdio>
-#include "rlutil.h"
-
 
 using namespace std;
 
 #include "utils.h"
-
-int main()
-{
-int mp,mr;
+    int dado[6];
+    int mp;
     string mj;
-    bool bandera = true;
-
-    while (true)
-    {
 
 
-        if (bandera == true) {
-            mp = 0;
-            mr=0;
-            bandera = false;
-        }
 
-        char opc;
+int main(){
+    while (true) {
+       char opc;
 
-        // Limpia la pantalla y muestra el menï¿½
+        // Limpia la pantalla y muestra el menú
         system("cls");
-rlutil::setColor(rlutil::GREEN);
-rlutil::locate(60,3);
-        // Imprime el tï¿½tulo del juego
+
+        // Imprime el título del juego
+        rlutil::setColor(rlutil::MAGENTA);
+        rlutil::locate(44, 5);
         cout << "El dados malditos" << endl;
-rlutil::setColor(rlutil::CYAN);
-        // Imprime las opciones del menï¿½
-rlutil::locate(60,4);
+
+        // Imprime las opciones del menú
+        rlutil::setColor(rlutil::WHITE);
+        rlutil::locate(44, 6);
         cout << "1- Un jugador" << endl;
-rlutil::locate(60,5);
+        rlutil::locate(44, 7);
         cout << "2- Dos jugadores" << endl;
-rlutil::locate(60,6);
+        rlutil::locate(44, 8);
         cout << "3- Mayor puntaje" << endl;
-rlutil::locate(60,7);
+        rlutil::locate(44, 9);
         cout << "4- Salir" << endl;
-rlutil::locate(60,8);
-        // Solicita al usuario ingresar una opciï¿½n
-rlutil::setColor(rlutil::GREEN);
+
+        // Solicita al usuario ingresar una opción
+        rlutil::locate(44, 10);
+        rlutil::setColor(rlutil::MAGENTA);
         cout << "Ingrese una opcion" << endl;
-rlutil::setColor(rlutil::WHITE);
-rlutil::locate(60,10);
+        rlutil::setColor(rlutil::WHITE);
+        rlutil::locate(44, 11);
         cin >> opc;
 
-        system("cls");
-        // Evalï¿½a la opciï¿½n ingresada por el usuario
-        switch (opc)
-        {
-        case '1':
-            // Llama a la funciï¿½n para un jugador
-            unJugador(mp,mj,mr);
-            break;
+        // Evalúa la opción ingresada por el usuario
+        switch (opc) {
+            case '1':
+                // Llama a la función para un jugador
+                unJugador(mp,mj);
+                break;
 
-        case '2':
-            // Llama a la funciï¿½n para dos jugadores (debe estar implementada)
-            dosJugadores(mp,mj,mr);
-            break;
+            case '2':
+                // Llama a la función para dos jugadores (debe estar implementada)
+                dosJugadores();
+                break;
 
-        case '3':
-            // Llama a la funciï¿½n para el mayor puntaje (debe estar implementada)
-            mayorPuntuacion( mp,mj,mr);
-            break;
+            case '3':
+                // Llama a la función para el mayor puntaje (debe estar implementada)
+                mayorPuntaje(mp,mj);
+                break;
 
-        case '4':
+            case '4':
+                // Sale del programa
+                return 0;
+
+            default:
+                // Mensaje para opciones inválidas
+                rlutil::setColor(rlutil::RED);
+                cout << "Opcion invalida. Intente nuevamente" << endl;
+                rlutil::setColor(rlutil::WHITE);
                 system("pause");
-            // Sale del programa
-            return 0;
+                break;
 
-        default:
-            // Mensaje para opciones invï¿½lidas
-
-            cout << "Opcion invalida. Intente nuevamente" << endl;
-            system("pause");
-            break;
         }
     }
 }
