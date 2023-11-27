@@ -4,12 +4,12 @@
 #include <cstring>
 #include <ctime>
 #include <cstdio>
+#include "rlutil.h"
 
 
 using namespace std;
 
 #include "utils.h"
-#include "rlutil.h"
 
 int main()
 {
@@ -23,7 +23,7 @@ int mp,mr;
 
         if (bandera == true) {
             mp = 0;
-            mr = 0;
+            mr=0;
             bandera = false;
         }
 
@@ -31,17 +31,26 @@ int mp,mr;
 
         // Limpia la pantalla y muestra el men�
         system("cls");
-
+rlutil::setColor(rlutil::GREEN);
+rlutil::locate(55,3);
         // Imprime el t�tulo del juego
         cout << "El dados malditos" << endl;
-
+rlutil::setColor(rlutil::CYAN);
         // Imprime las opciones del men�
+rlutil::locate(55,4);
         cout << "1- Un jugador" << endl;
+rlutil::locate(55,5);
         cout << "2- Dos jugadores" << endl;
+rlutil::locate(55,6);
         cout << "3- Mayor puntaje" << endl;
+rlutil::locate(55,7);
         cout << "4- Salir" << endl;
+rlutil::locate(55,8);
         // Solicita al usuario ingresar una opci�n
+rlutil::setColor(rlutil::GREEN);
         cout << "Ingrese una opcion" << endl;
+rlutil::setColor(rlutil::WHITE);
+rlutil::locate(55,9);
         cin >> opc;
 
         system("cls");
@@ -70,6 +79,7 @@ int mp,mr;
 
         default:
             // Mensaje para opciones inv�lidas
+
             cout << "Opcion invalida. Intente nuevamente" << endl;
             system("pause");
             break;
