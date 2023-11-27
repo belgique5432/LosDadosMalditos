@@ -4,6 +4,7 @@
 #include <cstring>
 #include <ctime>
 #include <cstdio>
+#include "rlutil.h"
 
 
 using namespace std;
@@ -12,7 +13,7 @@ using namespace std;
 
 int main()
 {
-int mp;
+int mp,mr;
     string mj;
     bool bandera = true;
 
@@ -22,6 +23,7 @@ int mp;
 
         if (bandera == true) {
             mp = 0;
+            mr=0;
             bandera = false;
         }
 
@@ -29,17 +31,26 @@ int mp;
 
         // Limpia la pantalla y muestra el men�
         system("cls");
-
+rlutil::setColor(rlutil::GREEN);
+rlutil::locate(60,3);
         // Imprime el t�tulo del juego
         cout << "El dados malditos" << endl;
-
+rlutil::setColor(rlutil::CYAN);
         // Imprime las opciones del men�
+rlutil::locate(60,4);
         cout << "1- Un jugador" << endl;
+rlutil::locate(60,5);
         cout << "2- Dos jugadores" << endl;
+rlutil::locate(60,6);
         cout << "3- Mayor puntaje" << endl;
+rlutil::locate(60,7);
         cout << "4- Salir" << endl;
+rlutil::locate(60,8);
         // Solicita al usuario ingresar una opci�n
+rlutil::setColor(rlutil::GREEN);
         cout << "Ingrese una opcion" << endl;
+rlutil::setColor(rlutil::WHITE);
+rlutil::locate(60,10);
         cin >> opc;
 
         system("cls");
@@ -48,17 +59,17 @@ int mp;
         {
         case '1':
             // Llama a la funci�n para un jugador
-            unJugador(mp,mj);
+            unJugador(mp,mj,mr);
             break;
 
         case '2':
             // Llama a la funci�n para dos jugadores (debe estar implementada)
-            dosJugadores(mp,mj);
+            dosJugadores(mp,mj,mr);
             break;
 
         case '3':
             // Llama a la funci�n para el mayor puntaje (debe estar implementada)
-            mayorPuntuacion( mp,mj);
+            mayorPuntuacion( mp,mj,mr);
             break;
 
         case '4':
@@ -68,6 +79,7 @@ int mp;
 
         default:
             // Mensaje para opciones inv�lidas
+
             cout << "Opcion invalida. Intente nuevamente" << endl;
             system("pause");
             break;

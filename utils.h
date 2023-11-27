@@ -10,6 +10,7 @@ using namespace std;
 
 int mostrarDados(int dado[])
 {
+rlutil::setColor(rlutil::MAGENTA);
     for (int i = 0; i <= 5; i++)
     {
         if (dado[i] == 1)
@@ -157,40 +158,71 @@ int mostrarDados(int dado[])
             cout << " -------   ";
         }
     }
+rlutil::setColor(rlutil::WHITE);
 }
 
 
-int mayorPuntuacion (int mp, string mj)
+int mayorPuntuacion (int mp, string mj,int mr)
 {
-    if (mp == 0)
+    if (mr == 0)
     {
-        cout<<"Todavia no hay puntuaciones establecidas" <<endl;
-        system("pause");
+
+system("cls");
+rlutil::setColor(rlutil::RED);
+rlutil::locate(44,3);
+		cout<<"-----------------------------------------";
+rlutil::locate(44,5);
+		cout<<"Aun no se ha registrado ningun puntaje"<<endl;
+rlutil::locate(44,7);
+		cout<<"-----------------------------------------";
+		cout<<endl;
+rlutil::locate(44,8);
+rlutil::setColor(rlutil::WHITE);
+		system("pause");
+
     }
     else
     {
-        cout<<"El jugador de mayor puntaje es: " <<mj;
-        system("pause");
+       system("cls");
+rlutil::setColor(rlutil::GREEN);
+rlutil::locate(44,3);
+		cout<<"-----------------------------------------";
+rlutil::locate(44,5);
+		cout << "El Jugador con menos rondas registrado es: "<<mj<< endl;
+rlutil::locate(44,6);
+		cout << "con "<<mr<<" rondas "<<" y un puntaje de "<<mp<<  endl;
+rlutil::locate(44,7);
+		cout<<"-----------------------------------------";
+		cout<<endl;
+rlutil::locate(44,9);
+rlutil::setColor(rlutil::WHITE);
+		system("pause");
+
+
     }
 }
 
 
 // Función principal del juego para un solo jugador
-int unJugador(int& mp, string& mj)
+int unJugador(int& mp, string& mj,int&mr)
 {
     int dado[6], puntuacion = 0, rondas = 1, comparaPuntuaciones[3], puntuacionJugador1 = 0;
     int c,p,x,i, Max = 0, banderaV = 0, contadorTrio = 0, Max1 = 0, Max2 = 0, puntuacionFinal = 0, bandera6 = 0;
     string jugador1;
-
+rlutil::setColor(rlutil::YELLOW);
     cout << "Ingrese nombre de jugador:" << endl;
     cin >> jugador1;
+rlutil::setColor(rlutil::WHITE);
     // Bucle principal del juego
-    while (puntuacionFinal <= 500 && rondas <= 10)
+    while (puntuacionFinal <= 500 )
     {
         Max1 = 0, Max2 = 0, Max = 0;
         banderaV = 0, bandera6 = 0;
         int contadorEscalera = 0;
+        system("cls");
+rlutil::setColor(rlutil::GREEN);
         cout<<" ronda "<<rondas<<" jugador "<<jugador1<<endl;
+rlutil::setColor(rlutil::WHITE);
         // Bucle para realizar 3 rondas por jugador
 
         for (int x = 0; x < 3; x++ )
@@ -221,8 +253,11 @@ int unJugador(int& mp, string& mj)
                 contadorEscalera++;
             }
             }
+ // Pausa para mostrar la puntuación antes de la siguiente ronda
+            system("pause");
 
             // Llamada a la función para mostrar los valores de los dados
+            cout<<" Lanzamiento N "<<x+1<<endl;
             mostrarDados(dado);
 
             // Comprobación de si todos los dados son iguales
@@ -314,10 +349,8 @@ int unJugador(int& mp, string& mj)
 
             // Almacenamiento de la puntuación de la ronda en el arreglo comparaPuntuaciones
             comparaPuntuaciones[x] = puntuacion;
-            cout << " Puntuacion " << puntuacion  << endl;
+            cout <<endl<< " Puntuacion " << puntuacion  << endl;
 
-            // Pausa para mostrar la puntuación antes de la siguiente ronda
-            system("pause");
 
 
             // Determinación de la puntuación máxima de la ronda
@@ -349,18 +382,31 @@ int unJugador(int& mp, string& mj)
         cout << "La puntuacion Total es: " << puntuacionFinal << " Ronda: " << rondas << endl;
         system("pause");
 
-        // Actualización de la máxima puntuación y el nombre del jugador
-        if (mp == 0)
-        {
-            mp = puntuacionFinal;
-            mj = jugador1;
-        }
-        else if (puntuacionFinal > mp)
-        {
-            mp = puntuacionFinal;
-            mj = jugador1;
-        }
+
+
     }//W22
+     // Actualización de la máxima puntuación y el nombre del jugador
+    if ( mr==0)
+    {
+        cout<<"rondas contadas"<<rondas;
+        system("pause");
+        mr=rondas;
+        mp = puntuacionFinal;
+
+        mj = jugador1;
+
+    }
+    else
+    {
+        if (rondas<mr)
+        {
+            mr=rondas;
+            mp = puntuacionFinal;
+            mj = jugador1;
+        }
+    }
+
+
     system("cls");
     cout<<" el jugador "<<jugador1<<" termino el juego con "<<puntuacionFinal<<" puntos "<<" y  en "<<rondas<<" rondas "<<endl;
     system("pause");
@@ -369,7 +415,7 @@ int unJugador(int& mp, string& mj)
     return 0;
 }
 
-int dosJugadores(int& mp, string& mj)
+int dosJugadores(int& mp, string& mj,int& mr)
 {
     int dado[6], puntuacionJugador1 = 0, puntuacionJugador2 = 0, puntuacion = 0, rondas = 1, comparaPuntuaciones[3];
     int Max = 0, banderaV = 0, contadorTrio = 0, Max1 = 0, Max2 = 0, puntuacionFinalJugador1 = 0, puntuacionFinalJugador2 = 0, contador = 0, bandera6 = 0;
